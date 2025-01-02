@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 interface PageProps {
-	params: { slug: string };
+	// params: { slug: string };
 	searchParams: { [key: string]: string | string[] | undefined };
 }
 
