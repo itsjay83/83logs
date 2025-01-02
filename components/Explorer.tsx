@@ -7,7 +7,7 @@ import { Post } from "@/types";
 import { useUI } from "@/context/UIContext";
 import {
 	ChevronRight,
-	ChevronDown,
+	// ChevronDown,
 	Menu,
 	FileText,
 	Folder,
