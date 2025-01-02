@@ -7,19 +7,20 @@ export const metadata = {
 	description: "Search results for blog posts",
 };
 
-interface SearchPageProps {
-	searchParams: {
-		q: string;
-	};
-}
+// Use the correct Next.js page props type
+export default async function SearchPage({
+	searchParams,
+}: {
+	searchParams: { [key: string]: string | string[] | undefined };
+}) {
+	const searchQuery = typeof searchParams.q === "string" ? searchParams.q : "";
 
-export default function SearchPage({ searchParams }: SearchPageProps) {
 	return (
 		<div className="prose prose-invert max-w-none">
 			<h1>Search Results</h1>
-			<p>Results for: {searchParams.q}</p>
+			<p>Results for: {searchQuery}</p>
 			<Suspense fallback={<div>Loading...</div>}>
-				<SearchResults query={searchParams.q} />
+				<SearchResults query={searchQuery} />
 			</Suspense>
 		</div>
 	);
