@@ -7,12 +7,12 @@ export const metadata = {
 	description: "Search results for blog posts",
 };
 
-// Use the correct Next.js page props type
-export default async function SearchPage({
-	searchParams,
-}: {
+interface PageProps {
+	params: { slug: string };
 	searchParams: { [key: string]: string | string[] | undefined };
-}) {
+}
+
+export default async function SearchPage({ params, searchParams }: PageProps) {
 	const searchQuery = typeof searchParams.q === "string" ? searchParams.q : "";
 
 	return (
