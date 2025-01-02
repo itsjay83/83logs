@@ -1,18 +1,18 @@
-// src/app/posts/[slug]/page.tsx
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getPost, getAllPosts } from "@/lib/posts";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+// Define the PostParams type
 interface PostParams {
 	slug: string;
 }
 
 interface PageProps {
-	params: Promise<PostParams> | PostParams;
+	params: Promise<PostParams>;
 }
 
-// 정적 페이지 생성을 위한 경로 설정
+// Static paths generation
 export async function generateStaticParams() {
 	const posts = await getAllPosts();
 	return posts.map((post) => ({
@@ -20,10 +20,10 @@ export async function generateStaticParams() {
 	}));
 }
 
-// 포스트 페이지 컴포넌트
+// Post page component
 export default async function Post({ params }: PageProps) {
 	try {
-		const resolvedParams = await Promise.resolve(params);
+		const resolvedParams = await params;
 		const post = await getPost(resolvedParams.slug);
 
 		return (
@@ -54,12 +54,12 @@ export default async function Post({ params }: PageProps) {
 	}
 }
 
-// 메타데이터 생성
+// Metadata generation
 export async function generateMetadata({
 	params,
 }: PageProps): Promise<Metadata> {
 	try {
-		const resolvedParams = await Promise.resolve(params);
+		const resolvedParams = await params;
 		const post = await getPost(resolvedParams.slug);
 		return {
 			title: post.title,
