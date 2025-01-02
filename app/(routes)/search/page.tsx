@@ -12,9 +12,9 @@ interface PageProps {
 	searchParams: { [key: string]: string | string[] | undefined };
 }
 
-export default async function SearchPage({ params, searchParams }: PageProps) {
+// export default async function SearchPage({ params, searchParams }: PageProps) {
+export default async function SearchPage({ searchParams }: PageProps) {
 	const searchQuery = typeof searchParams.q === "string" ? searchParams.q : "";
-
 	return (
 		<div className="prose prose-invert max-w-none">
 			<h1>Search Results</h1>
