@@ -9,8 +9,8 @@ export default function Home() {
 				I'm <b>Jeseok Lee</b> from south Korea
 			</p>
 			<p>
-				This blog is a demo version. Please wait a day, and you’ll have access
-				to the full version of my posts.
+				This blog is a demo version. Please wait a day, and you&sdquo;ll have
+				access to the full version of my posts.
 			</p>
 		</div>
 	);

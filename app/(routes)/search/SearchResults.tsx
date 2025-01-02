@@ -42,7 +42,7 @@ export default function SearchResults({ query }: { query: string }) {
 	}
 
 	if (results.length === 0) {
-		return <div>No results found for "{query}"</div>;
+		return <div>No results found for &ldquo;{query}&rdquo;</div>;
 	}
 
 	return (
