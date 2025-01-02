@@ -7,11 +7,13 @@ export const metadata = {
 	description: "Search results for blog posts",
 };
 
-export default function SearchPage({
-	searchParams,
-}: {
-	searchParams: { q: string };
-}) {
+interface SearchPageProps {
+	searchParams: {
+		q: string;
+	};
+}
+
+export default function SearchPage({ searchParams }: SearchPageProps) {
 	return (
 		<div className="prose prose-invert max-w-none">
 			<h1>Search Results</h1>
