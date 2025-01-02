@@ -1,5 +1,5 @@
-// src/app/search/SearchResults.tsx
-("use client");
+// src/app/(routes)/search/SearchResults.tsx
+"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";

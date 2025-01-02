@@ -1,6 +1,11 @@
-// src/app/search/page.tsx
+// src/app/(routes)/search/page.tsx
 import { Suspense } from "react";
 import SearchResults from "./SearchResults";
+
+export const metadata = {
+	title: "Search Results",
+	description: "Search results for blog posts",
+};
 
 export default function SearchPage({
 	searchParams,
