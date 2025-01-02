@@ -18,7 +18,7 @@ export default function TopBar() {
 
 	return (
 		<div className="h-12 bg-[#252526] border-b border-[#3C3C3C] flex items-center justify-center">
-			<form onSubmit={handleSearch} className="w-96">
+			{/* <form onSubmit={handleSearch} className="w-96">
 				<input
 					type="text"
 					placeholder="Search posts...(not working yet)"
@@ -26,8 +26,8 @@ export default function TopBar() {
 					value={searchQuery}
 					onChange={(e) => setSearchQuery(e.target.value)}
 				/>
-			</form>
-			{/* Welcome to my dev logs */}
+			</form> */}
+			Welcome to my dev logs
 		</div>
 	);
 }
