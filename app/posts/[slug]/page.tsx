@@ -48,7 +48,8 @@ export default async function Post({ params }: PageProps) {
 				</div>
 			</article>
 		);
-	} catch {
+	} catch (error) {
+		console.log(error);
 		notFound();
 	}
 }
@@ -64,7 +65,8 @@ export async function generateMetadata({
 			title: post.title,
 			description: `${post.title} - Developer Blog`,
 		};
-	} catch {
+	} catch (error) {
+		console.log(error);
 		return {
 			title: "Post Not Found",
 			description: "The requested post could not be found.",
