@@ -2,24 +2,38 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Post } from "@/types";
+import { NextPage } from "next";
 
+// 타입 정의
+interface Post {
+	title: string;
+	date: string;
+	tags: string[];
+	content: string;
+}
+
+interface PageProps {
+	params: {
+		slug: string;
+	};
+	searchParams?: { [key: string]: string | string[] | undefined };
+}
+
+// API 호출 함수
 async function getPost(slug: string): Promise<Post> {
 	const response = await fetch(
 		`${process.env.NEXT_PUBLIC_API_URL}/api/posts/${slug}`
 	);
+
 	if (!response.ok) {
 		throw new Error("Failed to fetch post");
 	}
+
 	return response.json();
 }
 
-// Post page component
-export default async function PostPage({
-	params: { slug },
-}: {
-	params: { slug: string };
-}) {
+// 포스트 페이지 컴포넌트
+const PostPage: NextPage<PageProps> = async ({ params: { slug } }) => {
 	try {
 		const post = await getPost(slug);
 
@@ -46,28 +60,34 @@ export default async function PostPage({
 			</article>
 		);
 	} catch (error) {
-		console.error("Error:", error);
+		if (error instanceof Error) {
+			console.error("Error:", error.message);
+		}
 		notFound();
 	}
-}
+};
 
-// Metadata generation
+// 메타데이터 생성 함수
 export async function generateMetadata({
 	params: { slug },
-}: {
-	params: { slug: string };
-}): Promise<Metadata> {
+}: PageProps): Promise<Metadata> {
 	try {
 		const post = await getPost(slug);
+
 		return {
 			title: post.title,
 			description: `${post.title} - Developer Blog`,
 		};
 	} catch (error) {
-		console.error("Error:", error);
+		if (error instanceof Error) {
+			console.error("Error:", error.message);
+		}
+
 		return {
 			title: "Post Not Found",
 			description: "The requested post could not be found.",
 		};
 	}
 }
+
+export default PostPage;
