@@ -1,15 +1,18 @@
 import { getPost } from "@/lib/posts";
 import { notFound } from "next/navigation";
 
-export default async function PostPage({
-	params,
-}: {
-	params: { slug: string };
-}) {
-	// Fetch post data using the slug
+// params 타입을 명시적으로 선언
+interface PageProps {
+	params: {
+		slug: string;
+	};
+}
+
+export default async function PostPage({ params }: PageProps) {
+	// 슬러그를 통해 게시물 데이터를 가져옵니다.
 	const post = await getPost(params.slug);
 
-	// If the post does not exist, render the "not found" page
+	// 게시물이 없는 경우 404 페이지 렌더링
 	if (!post) {
 		notFound();
 	}
