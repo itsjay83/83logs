@@ -4,13 +4,11 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Post } from "@/types";
 
-interface PostParams {
-	slug: string;
-}
-
-interface PageProps {
-	params: PostParams;
-}
+type PageProps = {
+	params: {
+		slug: string;
+	};
+};
 
 async function getPost(slug: string): Promise<Post> {
 	const response = await fetch(
