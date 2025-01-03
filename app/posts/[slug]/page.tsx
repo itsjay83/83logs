@@ -4,12 +4,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Post } from "@/types";
 
-type PageProps = {
-	params: {
-		slug: string;
-	};
-};
-
 async function getPost(slug: string): Promise<Post> {
 	const response = await fetch(
 		`${process.env.NEXT_PUBLIC_API_URL}/api/posts/${slug}`
@@ -21,9 +15,13 @@ async function getPost(slug: string): Promise<Post> {
 }
 
 // Post page component
-export default async function PostPage({ params }: PageProps) {
+export default async function PostPage({
+	params: { slug },
+}: {
+	params: { slug: string };
+}) {
 	try {
-		const post = await getPost(params.slug);
+		const post = await getPost(slug);
 
 		return (
 			<article className="prose prose-invert prose-pre:bg-[#1E1E1E] prose-headings:text-white prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg max-w-none">
@@ -55,10 +53,12 @@ export default async function PostPage({ params }: PageProps) {
 
 // Metadata generation
 export async function generateMetadata({
-	params,
-}: PageProps): Promise<Metadata> {
+	params: { slug },
+}: {
+	params: { slug: string };
+}): Promise<Metadata> {
 	try {
-		const post = await getPost(params.slug);
+		const post = await getPost(slug);
 		return {
 			title: post.title,
 			description: `${post.title} - Developer Blog`,
